@@ -11,6 +11,12 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String SLIST_ID_EXTRA = "pl.lukpra.shoppinglist.ShopList Identifier";
+    public static final String SLIST_NAME_EXTRA = "pl.lukpra.shoppinglist.ShopList Name";
+    public static final String SLIST_INFO_EXTRA = "pl.lukpra.shoppinglist.ShopList Info";
+    public static final String SLIST_CATEGORY_EXTRA ="pl.lukpra.shoppinglist.ShopList Category";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/listBackground"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listShoppingImg"
+        android:src="@drawable/no"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="List element title here"
+        android:id="@+id/listShoppingTitle"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/listShoppingImg"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_margin="2dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="longlonglong text long text long text should be quite long enough for debug pursposes"
+        android:id="@+id/listShoppingNote"
+        android:layout_below="@+id/listShoppingTitle"
+        android:layout_toEndOf="@+id/listShoppingImg"
+        android:ellipsize="end"
+        android:singleLine="true"/>
+
+</RelativeLayout>

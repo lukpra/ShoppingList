@@ -9,13 +9,17 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.Serializable;
+
 public class MainActivity extends AppCompatActivity {
 
-    public static final String SLIST_ID_EXTRA = "pl.lukpra.shoppinglist.ShopList Identifier";
-    public static final String SLIST_NAME_EXTRA = "pl.lukpra.shoppinglist.ShopList Name";
-    public static final String SLIST_INFO_EXTRA = "pl.lukpra.shoppinglist.ShopList Info";
-    public static final String SLIST_CATEGORY_EXTRA ="pl.lukpra.shoppinglist.ShopList Category";
+    public static final String SLIST_ID_EXTRA = "pl.lukpra.shoppinglist.ShopList.Identifier";
+    public static final String SLIST_NAME_EXTRA = "pl.lukpra.shoppinglist.ShopList.Name";
+    public static final String SLIST_INFO_EXTRA = "pl.lukpra.shoppinglist.ShopList.Info";
+    public static final String SLIST_CATEGORY_EXTRA ="pl.lukpra.shoppinglist.ShopList.Category";
+    public static final String SLIST_FRAGMENT_TO_LOAD_EXTRA = "pl.lukpra.shoppinglist.Fragment_to_Load";
 
+    public enum FragmentToLaunch{ VIEW, EDIT}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

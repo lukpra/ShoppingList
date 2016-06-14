@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingStart="12dp"
@@ -8,10 +7,10 @@
     android:paddingEnd="10dp"
     android:background="@color/listBackground">
 
-    <ImageView
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/viewsListIcon"
+        android:id="@+id/editListIcon"
         android:src="@drawable/no"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
@@ -20,37 +19,52 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/viewsScrollView"
+        android:id="@+id/editScrollView"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/viewsListIcon"
-        android:layout_alignBottom="@+id/viewsListIcon">
+        android:layout_toEndOf="@+id/editListIcon"
+        android:layout_alignBottom="@+id/editListIcon">
 
-    
-        <TextView
-            android:layout_width="wrap_content"
+
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minLines="1"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Layout: title goes here ... "
-            android:id="@+id/viewsListName"/>
+            android:inputType="text"
+            android:id="@+id/editListName"/>
     </ScrollView>
 
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/viewsScrollView"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/editScrollView"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="4dp"
+        android:id="@+id/infoScrollView"
+        android:layout_above="@+id/SaveInfo">
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minLines="3"
             android:text="Sample long text that is not long at all"
-            android:id="@+id/viewsListinfo"
+            android:id="@+id/editListinfo"
             android:textSize="20sp"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            android:inputType="textMultiLine"
+            android:gravity="top"/>
     </ScrollView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SaveInfo"
+        android:text="@string/saveInfoButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/infoScrollView"/>
 
 </RelativeLayout>

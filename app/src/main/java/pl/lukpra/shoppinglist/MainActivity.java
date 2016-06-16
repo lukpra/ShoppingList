@@ -1,5 +1,6 @@
 package pl.lukpra.shoppinglist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String SLIST_CATEGORY_EXTRA ="pl.lukpra.shoppinglist.ShopList.Category";
     public static final String SLIST_FRAGMENT_TO_LOAD_EXTRA = "pl.lukpra.shoppinglist.Fragment_to_Load";
 
-    public enum FragmentToLaunch{ VIEW, EDIT}
+    public enum FragmentToLaunch{ VIEW, EDIT, ADD}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        } else if(id == R.id.action_add_item){
+            Intent intent = new Intent(this, ShopListDetailActivity.class);
+            intent.putExtra(MainActivity.SLIST_FRAGMENT_TO_LOAD_EXTRA, FragmentToLaunch.ADD);
+            startActivity(intent);
             return true;
         }
 

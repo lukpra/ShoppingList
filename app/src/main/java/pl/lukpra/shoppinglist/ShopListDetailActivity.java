@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 public class ShopListDetailActivity extends AppCompatActivity {
 
+    public static final String NEW_SHOPLIST_EXTRA = "New Shop List Element";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +35,16 @@ public class ShopListDetailActivity extends AppCompatActivity {
                 fragmentTransaction.add(R.id.product_container, shopListDetailFragment, "SHOPLIST_VIEW_FRAGMENT");
                 setTitle(R.string.viewShopListDetail);
                 break;
+
+            case ADD:
+                ShopListEditFragment shopAddFragment = new ShopListEditFragment();
+                setTitle(R.string.ftl_add);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(NEW_SHOPLIST_EXTRA, true);
+                shopAddFragment.setArguments(bundle);
+                fragmentTransaction.add(R.id.product_container, shopAddFragment, "SHOPLIST_ADD_FRAGMENT");
+                break;
         }
-
-
 
         fragmentTransaction.commit();
     }

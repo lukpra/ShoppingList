@@ -6,7 +6,10 @@
     <string name="editFragmentTitle">Edit product</string>
     <string name="edit_menu">Edit</string>
     <string name="saveInfoButton">Save Edits</string>
-
+    <string name="action_bar_add">ADD</string>
+    <string name="ftl_view">View</string>
+    <string name="ftl_edit">Edit</string>
+    <string name="ftl_add">Add element</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

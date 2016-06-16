@@ -25,6 +25,7 @@ public class ShopListEditFragment extends Fragment {
     private ImageButton img;
     private ShopList.Category savedButtonCattegory;
     private EditText name, info;
+    private static String Modified_Category = "Modifired Category";
     private AlertDialog categoryDialogObject, confirmDialogObject;
     public ShopListEditFragment() {
         // Required empty public constructor
@@ -35,6 +36,9 @@ public class ShopListEditFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        if(savedInstanceState != null){
+            savedButtonCattegory = (ShopList.Category) savedInstanceState.get(Modified_Category);
+        }
         View fragmentLayout = inflater.inflate(R.layout.fragment_shop_list_edit, container, false);
 
         name = (EditText) fragmentLayout.findViewById(R.id.editListName);
@@ -45,13 +49,16 @@ public class ShopListEditFragment extends Fragment {
 
         Intent intent = getActivity().getIntent();
 
-        name.setText(intent.getExtras().getString(MainActivity.SLIST_NAME_EXTRA));
-        info.setText(intent.getExtras().getString(MainActivity.SLIST_INFO_EXTRA));
+        name.setText(intent.getExtras().getString(MainActivity.SLIST_NAME_EXTRA, "")); // overload to return an empty string if not found
+        info.setText(intent.getExtras().getString(MainActivity.SLIST_INFO_EXTRA, ""));
 
-        ShopList.Category imgCat = (ShopList.Category) intent.getSerializableExtra(MainActivity.SLIST_CATEGORY_EXTRA);
-        savedButtonCattegory = imgCat;
-        img.setImageResource(ShopList.getDrawable(imgCat));
-
+        if(savedButtonCattegory != null){
+            img.setImageResource(ShopList.getDrawable(savedButtonCattegory));
+        }else{
+            ShopList.Category imgCat = (ShopList.Category) intent.getSerializableExtra(MainActivity.SLIST_CATEGORY_EXTRA);
+            savedButtonCattegory = imgCat;
+            img.setImageResource(ShopList.getDrawable(imgCat));
+        }
         buildCategoryDialog();
         buildConfirmDialog();
 
@@ -71,6 +78,13 @@ public class ShopListEditFragment extends Fragment {
 
         return fragmentLayout;
         // Inflate the layout for this fragment
+    }
+
+    // on orientation change save instance
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putSerializable(Modified_Category, savedButtonCattegory);
     }
 
     private void buildCategoryDialog(){

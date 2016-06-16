@@ -25,6 +25,7 @@ public class ShopListEditFragment extends Fragment {
     private ImageButton img;
     private ShopList.Category savedButtonCattegory;
     private EditText name, info;
+    private boolean newShopListElement = false;
     private static String Modified_Category = "Modifired Category";
     private AlertDialog categoryDialogObject, confirmDialogObject;
     public ShopListEditFragment() {
@@ -36,6 +37,11 @@ public class ShopListEditFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        Bundle bundle = this.getArguments();
+        if(bundle != null)
+        {
+            newShopListElement = bundle.getBoolean(ShopListDetailActivity.NEW_SHOPLIST_EXTRA, false); // get if we create a new shoplist element
+        }
         if(savedInstanceState != null){
             savedButtonCattegory = (ShopList.Category) savedInstanceState.get(Modified_Category);
         }
@@ -53,9 +59,9 @@ public class ShopListEditFragment extends Fragment {
         info.setText(intent.getExtras().getString(MainActivity.SLIST_INFO_EXTRA, ""));
 
         if(savedButtonCattegory != null){
-            img.setImageResource(ShopList.getDrawable(savedButtonCattegory));
-        }else{
-            ShopList.Category imgCat = (ShopList.Category) intent.getSerializableExtra(MainActivity.SLIST_CATEGORY_EXTRA);
+            img.setImageResource(ShopList.getDrawable(savedButtonCattegory)); // grab old category
+        }else if(!newShopListElement){
+            ShopList.Category imgCat = (ShopList.Category) intent.getSerializableExtra(MainActivity.SLIST_CATEGORY_EXTRA); // set new
             savedButtonCattegory = imgCat;
             img.setImageResource(ShopList.getDrawable(imgCat));
         }

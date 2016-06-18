@@ -39,6 +39,10 @@ public class ShopListDbAdapter {
         return newSList;
     }
 
+    public long deleteNote(long id){
+        return sqldb.delete(SHOP_LIST_TABLE, COL_ID + " = " + id, null);
+    }
+
     public long updateElement(String name, String info, ShopList.Category category, long id){
         ContentValues values = new ContentValues();
         values.put(COL_NAME, name);

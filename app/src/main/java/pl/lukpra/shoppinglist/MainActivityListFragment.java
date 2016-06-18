@@ -68,11 +68,23 @@ public class MainActivityListFragment extends ListFragment {
 
         AdapterView.AdapterContextMenuInfo infos = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int rowPosition = infos.position;
+        ShopList slist = (ShopList) getListAdapter().getItem(rowPosition);
         switch(item.getItemId()){
             case R.id.edit:
                 getProductDetailActivity(MainActivity.FragmentToLaunch.EDIT,rowPosition);
                 Log.d("Edit clicked", "Exciting!");
                 return true;
+            case R.id.delete:
+                Log.d("Delete clicked", "Dangerous yet Exciting!");
+                ShopListDbAdapter dbAdapter = new ShopListDbAdapter((getActivity().getBaseContext()));
+                dbAdapter.open();
+                dbAdapter.deleteNote(slist.getListId());
+
+                sList.clear();
+                sList.addAll(dbAdapter.getAllShopListElements());
+                shoppyAdapter.notifyDataSetChanged();
+
+                dbAdapter.close();
         }
 
         return super.onContextItemSelected(item);

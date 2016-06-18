@@ -10,6 +10,7 @@
     <string name="ftl_view">View</string>
     <string name="ftl_edit">Edit</string>
     <string name="ftl_add">Add element</string>
+    <string name="delete_menu">Delete</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

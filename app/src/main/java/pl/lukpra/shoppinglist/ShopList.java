@@ -1,8 +1,6 @@
 package pl.lukpra.shoppinglist;
 
-/**
- * Created by Derezady on 2016-06-13.
- */
+
 public class ShopList {
     private String name, info;
     private long listId, dateCreated;

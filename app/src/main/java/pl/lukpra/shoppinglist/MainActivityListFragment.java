@@ -30,31 +30,12 @@ public class MainActivityListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
 
-        sList = new ArrayList<ShopList>();
-        sList.add(new ShopList("title","desc",
-                ShopList.Category.BANANA, 1 , 1));
-        sList.add(new ShopList("title","desc",
-                ShopList.Category.BANANA, 1 , 1));
-        sList.add(new ShopList("title","desc",
-                ShopList.Category.BANANA, 1 , 1));
-        sList.add(new ShopList("title","desc",
-                ShopList.Category.BANANA, 1 , 1));
-        sList.add(new ShopList("title","desc",
-                ShopList.Category.BANANA, 1 , 1));
-        sList.add(new ShopList("title","desc",
-                ShopList.Category.BANANA, 1 , 1));
-        sList.add(new ShopList("title","desc",
-                ShopList.Category.FISH, 1 , 1));
-        sList.add(new ShopList("title","desc",
-                ShopList.Category.FISH, 1 , 1));
-        sList.add(new ShopList("title","desc",
-                ShopList.Category.FISH, 1 , 1));
-        sList.add(new ShopList("title","desc",
-                ShopList.Category.FISH, 1 , 1));
-        sList.add(new ShopList("title","desc",
-                ShopList.Category.FISH, 1 , 1));
-        sList.add(new ShopList("title","desc",
-                ShopList.Category.FISH, 1 , 1));
+        ShopListDbAdapter shopListDbAdapter = new ShopListDbAdapter(getActivity().getBaseContext());
+        shopListDbAdapter.open();
+
+        sList = shopListDbAdapter.getAllShopListElements();
+
+        shopListDbAdapter.close();
 
         shoppyAdapter = new ShoppyAdapter(getActivity(), sList);
 

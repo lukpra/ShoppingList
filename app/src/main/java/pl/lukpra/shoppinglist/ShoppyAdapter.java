@@ -13,9 +13,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-/**
- * Created by Derezady on 2016-06-13.
- */
+
 public class ShoppyAdapter extends ArrayAdapter<ShopList>{
 
     public static class ViewHolder {

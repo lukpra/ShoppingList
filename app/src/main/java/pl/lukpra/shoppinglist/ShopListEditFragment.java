@@ -28,6 +28,7 @@ public class ShopListEditFragment extends Fragment {
     private boolean newShopListElement = false;
     private static String Modified_Category = "Modifired Category";
     private AlertDialog categoryDialogObject, confirmDialogObject;
+    private long slistId = 0 ;
     public ShopListEditFragment() {
         // Required empty public constructor
     }
@@ -53,7 +54,10 @@ public class ShopListEditFragment extends Fragment {
         Button saveButton = (Button) fragmentLayout.findViewById(R.id.SaveInfo);
 
 
+
         Intent intent = getActivity().getIntent();
+
+        slistId = intent.getExtras().getLong(MainActivity.SLIST_ID_EXTRA, 0);
 
         name.setText(intent.getExtras().getString(MainActivity.SLIST_NAME_EXTRA, "")); // overload to return an empty string if not found
         info.setText(intent.getExtras().getString(MainActivity.SLIST_INFO_EXTRA, ""));
@@ -142,6 +146,17 @@ public class ShopListEditFragment extends Fragment {
             public void onClick(DialogInterface dialog, int item){
                 Log.d("Saving data: ", "Name: " + name.getText() + " info: " + info.getText() + " category: " + savedButtonCattegory);
 
+                ShopListDbAdapter dbAdapter = new ShopListDbAdapter(getActivity().getBaseContext());
+                dbAdapter.open();
+
+                if(newShopListElement)
+                {
+                    dbAdapter.createElement(name.getText() + " ", info.getText() + " ", (savedButtonCattegory == null)? ShopList.Category.PUMPKIN : savedButtonCattegory);
+                } else {
+                    dbAdapter.updateElement(name.getText() + " ", info.getText() + " ", (savedButtonCattegory == null)? ShopList.Category.PUMPKIN : savedButtonCattegory, slistId);
+                }
+
+                dbAdapter.close();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
             }

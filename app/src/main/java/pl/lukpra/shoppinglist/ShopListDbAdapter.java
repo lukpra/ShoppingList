@@ -1,17 +1,19 @@
 package pl.lukpra.shoppinglist;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ShopListDbAdapter {
 
     public ShopListDbAdapter(Context context)
     {
-
+        this.context = context;
     }
 
     public ShopListDbAdapter open() throws android.database.SQLException{
@@ -20,12 +22,39 @@ public class ShopListDbAdapter {
         return this;
     }
 
+    public ShopList createElement(String name, String info, ShopList.Category category){
+        ContentValues values = new ContentValues();
+        values.put(COL_NAME, name);
+        values.put(COL_INFO, info);
+        values.put(COL_CAT, category.name());
+        values.put(COL_DATE, Calendar.getInstance().getTimeInMillis() + "");
+
+        long insertId = sqldb.insert(SHOP_LIST_TABLE, null, values);
+
+        Cursor cursor = sqldb.query(SHOP_LIST_TABLE, allTable, COL_ID + " = " + insertId, null, null, null, null);
+
+        cursor.moveToFirst();
+        ShopList newSList = cursorToSlist(cursor);
+        cursor.close();
+        return newSList;
+    }
+
+    public long updateElement(String name, String info, ShopList.Category category, long id){
+        ContentValues values = new ContentValues();
+        values.put(COL_NAME, name);
+        values.put(COL_INFO, info);
+        values.put(COL_CAT, category.name());
+        values.put(COL_DATE, Calendar.getInstance().getTimeInMillis() + "");
+
+        return sqldb.update(SHOP_LIST_TABLE, values, COL_ID + " = " + id, null);
+    }
+
     public ArrayList<ShopList> getAllShopListElements(){
         ArrayList<ShopList> elems = new ArrayList<ShopList>();
 
         Cursor cursor = sqldb.query(SHOP_LIST_TABLE, allTable, null, null, null, null, null);
 
-        for(cursor.moveToLast(); !cursor.isBeforeFirst(); cursor.moveToPrevious());
+        for(cursor.moveToLast(); !cursor.isBeforeFirst(); cursor.moveToPrevious())
         {
             ShopList slist = cursorToSlist(cursor);
             elems.add(slist);
